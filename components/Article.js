@@ -93,7 +93,8 @@ const data = [
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
   and returns a DOM node looking like the one below:
-
+*/
+/*
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -107,10 +108,54 @@ const data = [
   This listener should toggle the class 'article-open' on div.article.
 
   Step 3: Don't forget to return something from your function!
+*/
+/* N E E D TO MAKE A COMPONENT TO STICK ARTICLE ONTO! ! ! ! */
+const articles= document.querySelector('.articles');
+  function articleMaker(articleObj){
+    const articleElement = document.createElement('div');
+    const titleElement = document.createElement('h2');
+    const dateElement = document.createElement('p');
+    const paragraphOneElement = document.createElement('p');
+    const paragraphTwoElement = document.createElement('p');
+    const paragraphThreeElement = document.createElement('p');
+    const expandButtonElement = document.createElement('span'); 
+//the above seems to be working...
+    
+/* adding a heirarchy... */
+    articleElement.appendChild(titleElement);
+    articleElement.appendChild(dateElement);
+    articleElement.appendChild(paragraphOneElement);
+    articleElement.appendChild(paragraphTwoElement);
+    articleElement.appendChild(paragraphThreeElement);
+    articleElement.appendChild(expandButtonElement);
+/* adding an eventListened to hide/show paragraphs using a span */ 
+    expandButtonElement.addEventListener('click',function(event){
+      console.log("click");
+      event.target.classList.toggle('.article-open');
+    })
+/*Need to add the text content to the created elements */
+titleElement.textContent = articleObj.title;
+dateElement.textContent = articleObj.date;
+paragraphOneElement.textContent = articleObj.firstParagraph;
+paragraphTwoElement.textContent = articleObj.secondParagraph;
+paragraphThreeElement.textContent = articleObj.thirdParagraph;
+expandButtonElement.textContent = '+';
 
+    return articleElement; /* this will return the article, need to establish heirarchy and appendChild (done) */
+  }
+/*
   Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
   to create a div.article element and append it to the DOM inside div.articles (see index.html).
+*/
+  
+  
+  data.forEach(item => {
+    articles.append(articleMaker(item))
+  });
 
+
+
+/*
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
