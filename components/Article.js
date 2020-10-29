@@ -130,27 +130,32 @@ const articles= document.querySelector('.articles');
     articleElement.appendChild(expandButtonElement);
 /* adding an eventListened to hide/show paragraphs using a span */ 
     expandButtonElement.addEventListener('click',function(event){
-      return expandButtonElement.classList.toggle('.expand-article');
+      console.log("click");
+      event.target.classList.toggle('.article-open');
     })
 /*Need to add the text content to the created elements */
 titleElement.textContent = articleObj.title;
 dateElement.textContent = articleObj.date;
 paragraphOneElement.textContent = articleObj.firstParagraph;
 paragraphTwoElement.textContent = articleObj.secondParagraph;
-paragraphThreeElement.textContent = articleObj. thirdParagraph;
+paragraphThreeElement.textContent = articleObj.thirdParagraph;
 expandButtonElement.textContent = '+';
 
-    return articleElement /* this will return the article, need to establish heirarchy and appendChild (done) */
+    return articleElement; /* this will return the article, need to establish heirarchy and appendChild (done) */
   }
-
-
-  
-
-
 /*
   Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
   to create a div.article element and append it to the DOM inside div.articles (see index.html).
+*/
+  
+  
+  data.forEach(item => {
+    articles.append(articleMaker(item))
+  });
 
+
+
+/*
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
